@@ -1,0 +1,8 @@
+[package]
+name = "lml"
+version = "0.1.0"
+authors = ["Vincent Van Ingen <foss@abitvin.net>"]
+
+[dependencies]
+grammer = { version = "0.6", git = 'https://github.com/abitvin/grammer-rust' }
+rule = { version = "0.5", git = 'https://github.com/abitvin/rule-rust' }
