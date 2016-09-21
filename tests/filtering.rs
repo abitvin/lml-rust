@@ -16,7 +16,10 @@ fn filtering_test_1()
     
     match result {
         Ok(lml) => {
-            let filtered = lml.children.iter().filter(|c| c.tag == "person");
+            let filtered = lml.children
+                .iter()
+                .filter(|c| c.tag == "person");
+            
             assert_eq!(3, filtered.count())
         },
         Err(_) => {
@@ -34,14 +37,15 @@ fn filtering_test_2()
     
     match result {
         Ok(lml) => {
-            let names = lml.children
-                           .iter()
-                           .filter(|c| c.tag == "name" && c.children.len() == 1)
-                           .map(|c| c.children[0].text.clone());
+            let names: Vec<String> = lml.children
+                .iter()
+                .filter(|c| c.tag == "name" && c.children.len() == 1)
+                .map(|c| c.children[0].text.clone())
+                .collect();
             
-            for n in names {
-                println!("Name: {}", n);
-            }
+            assert_eq!(2, names.len());
+            assert_eq!("John", names[0]);
+            assert_eq!("Bert", names[1]);
         },
         Err(_) => {
             panic!("Error parsing LML.");
